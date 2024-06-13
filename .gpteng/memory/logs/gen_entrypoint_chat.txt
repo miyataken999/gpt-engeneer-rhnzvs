@@ -1,0 +1,93 @@
+
+2024-06-13T23:54:45.772946
+================================ System Message ================================
+
+You will get information about a codebase that is currently on disk in the current folder.
+The user will ask you to write a script that runs the code in a specific way.
+You will answer with code blocks that include all the necessary terminal commands.
+Do not install globally. Do not use sudo.
+Do not explain the code, just give the commands.
+Do not use placeholders, use example values (like . for a folder argument) if necessary.
+
+
+================================ Human Message =================================
+
+
+        Make a unix script that
+        a) installs dependencies
+        b) runs all necessary parts of the codebase (in parallel if necessary)
+        
+Information about the codebase:
+
+```
+File: project
+1 onus_money_calculator/
+2 onus_money_calculator/
+3 __init__.py
+4 models/
+5 __init__.py
+6 person.py
+7 calculator.py
+8 services/
+9 __init__.py
+10 onus_calculator.py
+11 main.py
+12 requirements.txt
+
+File: file
+1 onus_money_calculator/requirements.txt
+
+File: value)
+1 Next, let's create the `calculator.py` file:
+
+File: onus_money_calculator/models/calculator.py
+1 ```
+2 from .person import Person
+3 
+4 class OnusCalculator:
+5     """Calculates the burden money for a group of people."""
+6     def __init__(self, people: list[Person]):
+7         self.people = people
+8 
+9     def calculate_onus(self, total_amount: float) -> dict[Person, float]:
+10         """Calculates the burden money for each person."""
+11         total_share = sum(person.share for person in self.people)
+12         onus_amounts = {}
+13         for person in self.people:
+14             onus_amount = (person.share / total_share) * total_amount
+15             onus_amounts[person] = onus_amount
+16         return onus_amounts
+
+File: onus_amounts.items()}
+1 Next, let's create the `main.py` file:
+
+File: onus_money_calculator/main.py
+1 ```
+2 from .services.onus_calculator import OnusCalculatorService
+3 
+4 def main():
+5     """Main entry point of the application."""
+6     onus_calculator_service = OnusCalculatorService()
+7     people = [{"name": "Alice", "share": 0.4}, {"name": "Bob", "share": 0.3}, {"name": "Charlie", "share": 0.3}]
+8     total_amount = 1000.0
+9     onus_amounts = onus_calculator_service.calculate_onus(people, total_amount)
+10     for person, onus_amount in onus_amounts.items():
+11         print(f"{person}: {onus_amount:.2f}")
+12 
+13 if __name__ == "__main__":
+14     main()
+
+```
+
+================================== Ai Message ==================================
+
+Here is the Unix script that installs dependencies and runs the codebase:
+```
+#!/bin/bash
+
+# Install dependencies
+pip install -r onus_money_calculator/requirements.txt
+
+# Run the main script
+python onus_money_calculator/main.py
+```
